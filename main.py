@@ -1,4 +1,3 @@
-import asyncio
 import i18n
 import os
 
