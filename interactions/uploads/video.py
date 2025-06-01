@@ -1,3 +1,4 @@
+import asyncio
 import i18n
 import threading
 
@@ -11,7 +12,7 @@ from services.conversion_service import convert_video
 from services.media_service import VIDEO_OUTPUT_TYPES, input_media_exist, clean_up_media, \
     DOCUMENT_VIDEO_INPUT_TYPES
 from services.message_service import update_message, send_document, send_message, parse_placeholders
-from ui.builder import show_conversion_options, show_animated_loader
+from ui.builder import show_conversion_options
 
 
 def handle_video_input():
@@ -99,8 +100,8 @@ async def handle_video_output(update, context):
         conversion_process = threading.Thread(target=convert_video, args=(chat_id, input_type,
                                                                           output_type))
         conversion_process.start()
-        while conversion_process.is_alive():
-            await show_animated_loader(processing_msg)
+        await asyncio.to_thread(conversion_process.join)
+
         await update_message(processing_msg, parse_placeholders(i18n.t("conversion.complete"),
                                                                 ["%input_type%", "%output_type%"],
                                                                 [input_type, output_type]))

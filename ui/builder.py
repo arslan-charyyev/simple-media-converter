@@ -32,16 +32,3 @@ def show_conversion_options(text, media_type, input_type):
     button_list.append([InlineKeyboardButton("Cancel", callback_data="cancel")])
     reply_markup = InlineKeyboardMarkup(build_menu(button_list))
     return reply_markup
-
-
-async def show_animated_loader(message):
-    """
-    Provides loading animation during media conversions.
-    Args:
-        message: message to edit to show loader
-    """
-    await update_message(message, text=message.text + " /", )
-    await update_message(message, text=message.text + " -")
-    await update_message(message, text=message.text + " \\")
-    await update_message(message, text=message.text + " |")
-    return None
