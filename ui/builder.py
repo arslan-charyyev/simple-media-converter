@@ -1,7 +1,5 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-from services.message_service import update_message
-
 
 def build_menu(buttons, header_buttons=None, footer_buttons=None):
     """
