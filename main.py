@@ -1,3 +1,4 @@
+import asyncio
 import i18n
 import os
 
@@ -24,10 +25,25 @@ def main():
     """
     Handles the initial launch of the program (entry point).
     """
+    bot_api_url = os.getenv("BOT_API_URL")
+    base_url = bot_api_url if bot_api_url else "https://api.telegram.org"
+
     token = os.getenv("BOT_TOKEN")
-    application = Application.builder().token(token).concurrent_updates(True).read_timeout(30).write_timeout(30).build() # noqa
+    application = Application \
+      .builder() \
+      .token(token) \
+      .concurrent_updates(True) \
+      .read_timeout(30) \
+      .write_timeout(30) \
+      .base_url(f"{base_url}/bot") \
+      .build() # noqa
+
+    if bot_api_url:
+        application.bot.log_out()
+
     load_interactions(application)
     print("Simple Media Converter instance started!")
+
     application.run_polling()
 
 
