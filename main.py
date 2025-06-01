@@ -24,6 +24,7 @@ def main():
     """
     Handles the initial launch of the program (entry point).
     """
+    telegram_local = os.getenv("TELEGRAM_LOCAL")
     bot_api_url = os.getenv("BOT_API_URL")
     base_url = bot_api_url if bot_api_url else "https://api.telegram.org"
 
@@ -33,9 +34,12 @@ def main():
       .token(token) \
       .concurrent_updates(True) \
       .read_timeout(30) \
+      .local_mode(bool(telegram_local)) \
       .write_timeout(30) \
       .base_url(f"{base_url}/bot") \
-      .build() # noqa
+      .build()
+      # .base_file_url(f"{base_url}/file/bot") \
+      # .build() # noqa
 
     if bot_api_url:
         application.bot.log_out()

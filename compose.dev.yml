@@ -1,0 +1,20 @@
+name: simple-media-converter-dev
+
+services:
+  telegram-bot-api:
+    image: aiogram/telegram-bot-api:9.0
+    env_file: .env
+    volumes:
+      - /var/lib/telegram-bot-api:/var/lib/telegram-bot-api
+    ports:
+      - "8081:8081"
+
+  # /var/lib/telegram-bot-api will be owned by random user on host FS
+  # Hence we need to grant read permissions to all
+  # In order to run main python program without root and error
+  permission-fix:
+    image: alpine:3.22.0
+    command: sh -c "chmod -R +rx /var/lib/telegram-bot-api"
+    volumes:
+      - /var/lib/telegram-bot-api:/var/lib/telegram-bot-api
+    restart: "no"
