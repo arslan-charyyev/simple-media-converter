@@ -10,8 +10,10 @@ services:
       - "8081:8081"
 
   # /var/lib/telegram-bot-api will be owned by random user on host FS
-  # Hence we need to grant read permissions to all
-  # In order to run main python program without root and error
+  # Hence we need to grant read permissions to all users
+  # in order to run main python program without root and error.
+  # Note that this has to be run after the bot has been started up
+  # because it needs to create subdirectories that correspond to a given bot.
   permission-fix:
     image: alpine:3.22.0
     command: sh -c "chmod -R +rx /var/lib/telegram-bot-api"

@@ -10,7 +10,8 @@
 </p>
 
 > [!NOTE]
-> This fork adds support for 3gp video format
+> This fork uses newer ffmpeg version (7.1.1) and 
+> adds support for .3gp and .mov video files.
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
