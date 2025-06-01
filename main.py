@@ -37,9 +37,7 @@ def main():
       .local_mode(bool(telegram_local)) \
       .write_timeout(30) \
       .base_url(f"{base_url}/bot") \
-      .build()
-      # .base_file_url(f"{base_url}/file/bot") \
-      # .build() # noqa
+      .build() # noqa
 
     if bot_api_url:
         application.bot.log_out()
