@@ -10,8 +10,12 @@
 </p>
 
 > [!NOTE]
-> This fork uses newer ffmpeg version (7.1.1) and 
-> adds support for .3gp and .mov video files.
+> Changes in this fork:
+> - Newer ffmpeg version (7.1.1) - results in better output
+> - Support for [.3gp](https://mimetype.io/video/3gpp) files
+> - Support for [.mov](https://mimetype.io/video/quicktime) files
+> - Removed message update animation - it triggers soft-ban from Telegram's rate limiter when processing large files
+> - Docker images labeled with version tags
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
